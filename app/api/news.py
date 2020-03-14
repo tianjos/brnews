@@ -12,11 +12,3 @@ def get_news(news_id):
 def get_all_news():
     return jsonify({'news': models.News.to_collection_json()})
 
-@api.route('/news/', methods=['POST'])
-def create_news():
-    data = request.get_json()
-    news = models.News()
-    news.from_json(**data)
-    db.session.add(news)
-    db.session.commit()
-    return jsonify({'data': news.to_json()})
