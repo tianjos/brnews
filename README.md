@@ -1,6 +1,11 @@
 # brnews
 API para consulta dos feeds dos principais sites de notícias do Brasil
 
+## requisitos para inicializar a aplicação (dev)
+- export FLASK_APP=main.py
+- flask create_all
+- flask run
+
 ## Estado atual
 - É possível realizar consumir as notícias, fontes(sites) e categorias das notícias
 

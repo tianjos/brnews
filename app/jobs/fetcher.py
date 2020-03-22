@@ -98,7 +98,6 @@ def fetch_rss():
     parser = Parser()
     parser.parser()
     for item in parser:
-        print(f'item -> {item}')
         try:
             source = models.Source.query.filter_by(name=item['source']).first()
             category = models.Category.query.filter_by(name=item['category']).first()
@@ -121,9 +120,9 @@ def fetch_rss():
                 news.add_category(category)
                 db.session.add(news)
                 db.session.commit()
-                print('Finalizado save........')
+                print('[!] news saved')
         except Exception as e:
-            print(f'error to save\n {str(e)} ')
+            print(f'[*] error to save\n {str(e)} ')
 
 def job1():
     print("Job 1 started.")

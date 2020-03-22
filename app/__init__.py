@@ -16,8 +16,8 @@ def create_app(config_name=None) -> Flask:
     app.config.from_object(cfg) if cfg else app.config.from_object('default')
     db.init_app(app)
     migrate.init_app(app, db)
-    # with app.app_context():
-    #     db.create_all()
+    with app.app_context():
+        db.create_all()
 
     scheduler.init_app(app)
     scheduler.start()

@@ -1,4 +1,5 @@
 from datetime import datetime
+from flask import url_for
 from app import db
 
 
@@ -7,7 +8,7 @@ class PaginateMixin:
     def to_paginate_collection(query, page, per_page, endpoint, **kwargs):
         resources = query.paginate(page, per_page, False)
         data = {
-            'items': [item.to_dict() for item in resources.items],
+            'items': [item.to_json() for item in resources.items],
             '_meta': {
                 'page': page,
                 'per_page': per_page,
@@ -24,7 +25,6 @@ class PaginateMixin:
             }
         }
         return data
-
 
 
 class Source(db.Model):
@@ -73,7 +73,7 @@ class Category(db.Model):
         return [category.to_json() for category in categories]
 
 
-class News(db.Model):
+class News(db.Model, PaginateMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
     link = db.Column(db.String(255))
