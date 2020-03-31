@@ -1,5 +1,6 @@
 import requests
 import feedparser
+from dateutil.parser import parse
 
 from app import models
 from app import scheduler
@@ -45,15 +46,8 @@ class Parser:
     def __len__(self):
         return len(self._news)
     
-    # def __iter__(self):
-    #     next(self._news)
-    
     def __getitem__(self, indice):
         return self._news[indice]
-
-    # def __setitem__(self, indice, value):
-    #     self.__index += 1
-    #     self._news[indice] = value
     
     def __delitem__(self, indice):
         del self._news[indice]
@@ -90,7 +84,7 @@ class News:
             'title': title,
             'link': link,
             'summary': summary,
-            'publication_date': published
+            'publication_date': parse(published, fuzzy=True)
         }
 
 
