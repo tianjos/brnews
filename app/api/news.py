@@ -15,3 +15,13 @@ def get_all_news():
     data = models.News.to_paginate_collection(models.News.query, page, per_page, 'api.get_all_news')
     return jsonify(data)
 
+@api.route('/news/search/', methods=['GET'])
+def get_news_filtered():
+    news = models.News.search(models.News, request.args.items())
+    return jsonify({'news': [news[new].to_json() for new in news]})
+
+
+
+
+
+

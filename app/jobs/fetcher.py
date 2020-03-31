@@ -90,7 +90,7 @@ class News:
             'title': title,
             'link': link,
             'summary': summary,
-            'publication date': published
+            'publication_date': published
         }
 
 
@@ -120,7 +120,7 @@ def fetch_rss():
                 news.add_category(category)
                 db.session.add(news)
                 db.session.commit()
-                print('[!] news saved')
+                print(f'[!] news -> {news.title} saved')
         except Exception as e:
             print(f'[*] error to save\n {str(e)} ')
 

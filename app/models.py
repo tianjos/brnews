@@ -1,11 +1,13 @@
+from typing import Dict, Any
 from datetime import datetime
 from flask import url_for
+from werkzeug.datastructures import MultiDict
 from app import db
 
 
 class PaginateMixin:
     @staticmethod
-    def to_paginate_collection(query, page, per_page, endpoint, **kwargs):
+    def to_paginate_collection(query: db.Model, page: int, per_page: int, endpoint: str, **kwargs) -> Dict[str, Any]:
         resources = query.paginate(page, per_page, False)
         data = {
             'items': [item.to_json() for item in resources.items],
@@ -25,6 +27,21 @@ class PaginateMixin:
             }
         }
         return data
+
+
+class SearchMixin:
+    @staticmethod
+    def search(model: db.Model, fields: MultiDict) -> Dict[str, db.Model] :
+        filtered = {}
+        for field in fields:
+            key, value = field
+            try:
+                model_field = getattr(model, key)
+            except AttributeError:
+                continue
+            news = model.query.filter(model_field.like(f'%{value}%')).all()
+            filtered.update({new.link: new for new in news})
+        return filtered
 
 
 class Source(db.Model):
@@ -73,7 +90,7 @@ class Category(db.Model):
         return [category.to_json() for category in categories]
 
 
-class News(db.Model, PaginateMixin):
+class News(db.Model, PaginateMixin, SearchMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64))
     link = db.Column(db.String(255))
@@ -98,9 +115,9 @@ class News(db.Model, PaginateMixin):
             'title': self.title,
             'link': self.link,
             'summary': self.summary,
-            'publication date': self.publication_date,
-            'source': self.source_id,
-            'category': self.category_id
+            'publication_date': self.publication_date,
+            'source': Source.query.filter_by(id=self.source_id).first().to_json(),
+            'category': Category.query.filter_by(id=self.category_id).first().to_json()
         }
     
     @classmethod
@@ -114,17 +131,4 @@ class News(db.Model, PaginateMixin):
     def add_category(self, category: Category) -> None:
         self.category_id = category.id
 
-    def filter_news_by_source(self, source_name: str) -> 'News':
-        source = Source.query.filter_by(source_name)
-        news = self.query.filter_by(source_id=source.id)
-        return news 
-    
-    def filter_news_by_category(self, category_name: str) -> 'News':
-        category = Category.query.filter_by(category_name)
-        news = self.query.filter_by(category_id=category.id)
-        return news
-    
-    def filter_by(self, items: list = None) -> 'News':
-        for item in items:
-            news = News.query.filter_by(item)
 
