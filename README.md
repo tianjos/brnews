@@ -30,4 +30,3 @@ API para consulta dos feeds dos principais sites de notícias do Brasil
 - /v1/news/search/?summary=Brasil
 - /v1/news/search/?title=Brasil&summary=Brasil
 
-*nota (busca é case sensitive)

@@ -18,7 +18,7 @@ def get_all_news():
 @api.route('/news/search/', methods=['GET'])
 def get_news_filtered():
     news = models.News.search(models.News, request.args.items())
-    return jsonify({'news': [news[new].to_json() for new in news]})
+    return jsonify({'news': [news[new].to_json() for new in news] or 'nothing found'})
 
 
 
