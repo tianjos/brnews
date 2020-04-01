@@ -29,4 +29,4 @@ API para consulta dos feeds dos principais sites de notícias do Brasil
 - /v1/news/search/?title=Brasil
 - /v1/news/search/?summary=Brasil
 - /v1/news/search/?title=Brasil&summary=Brasil
-
+- /v1/news/search/?publication_date=01-01-2020,31-01-2020

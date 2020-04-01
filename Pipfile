@@ -15,6 +15,8 @@ requests = "*"
 feedparser = "*"
 sqlalchemy = "*"
 python-dateutil = "*"
+gunicorn = "*"
+frozen-flask = "*"
 
 [requires]
 python_version = "3.7"
