@@ -21,7 +21,7 @@ class Config:
             # 'func': 'allowed_host:job1',
             'func': 'app.jobs.fetcher:context_fetch_rss',
             'trigger': 'interval',
-            'seconds': 60
+            'seconds': 3600 # 1 hour
         }
     ]
     SCHEDULER_API_ENABLED = True
