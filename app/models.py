@@ -85,6 +85,7 @@ class Category(db.Model):
             # 'news': self.news
         }
     
+    @classmethod
     def to_collection_json(cls) -> list:
         categories = cls.query.filter_by().all()
         return [category.to_json() for category in categories]
