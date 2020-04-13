@@ -5,10 +5,10 @@ from flask_apscheduler import APScheduler
 from config import config, Config
 
 
-db = SQLAlchemy()
-migrate = Migrate()
-scheduler = APScheduler()
 app = Flask(__name__)
+db = SQLAlchemy()
+scheduler = APScheduler()
+migrate = Migrate(app, db)
 
 def create_app(config_name=None) -> Flask:
     # app = Flask(__name__)
