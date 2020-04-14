@@ -93,7 +93,7 @@ class Category(db.Model):
 
 class News(db.Model, PaginateMixin, SearchMixin):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(64))
+    title = db.Column(db.String(255))
     link = db.Column(db.String(255))
     summary = db.Column(db.Text)
     publication_date = db.Column(db.String(64), nullable=True)
