@@ -3,7 +3,14 @@ API para consulta dos feeds dos principais sites de notícias do Brasil
 
 ## requisitos para inicializar a aplicação (dev)
 - export FLASK_APP=main.py
-- flask create_all
+- export DB_NAME="brnews"
+- export DB_USER="postgres"
+- export DB_PASS="changeme"
+- export DB_HOST="172.23.0.2"
+- export DATABASE_URL="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}"
+- flask db init
+- flask db migrate -m 'Initial commit'
+- flask db upgrade
 - flask run
 
 ## Estado atual

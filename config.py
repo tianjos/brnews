@@ -4,6 +4,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JOBS = [
@@ -11,7 +12,7 @@ class Config:
             'id': 'fetch_rss',
             'func': 'app.jobs.fetcher:context_fetch_rss',
             'trigger': 'interval',
-            'seconds': 3600 # 1 hour
+            'seconds': 180 # 1 hour
         }
     ]
     SCHEDULER_API_ENABLED = True
