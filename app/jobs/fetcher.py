@@ -105,7 +105,7 @@ def fetch_rss():
                 category.from_json(item['category'])
                 db.session.add(category)
                 db.session.commit()
-            if models.News.query.filter_by(title=item['link']).first():
+            if models.News.query.filter_by(link=item['link']).first():
                 continue
             else:
                 news = models.News()

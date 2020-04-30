@@ -12,7 +12,7 @@ class Config:
             'id': 'fetch_rss',
             'func': 'app.jobs.fetcher:context_fetch_rss',
             'trigger': 'interval',
-            'seconds': 180 # 1 hour
+            'seconds': 1800 # 1/2 hour
         }
     ]
     SCHEDULER_API_ENABLED = True
