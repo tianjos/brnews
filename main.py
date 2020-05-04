@@ -1,11 +1,12 @@
 import os
 
 from app import create_app
-from app import db
-from sqlalchemy_utils import create_database, database_exists, drop_database
+from app import db, cli
+
 
 app_config = os.environ.get('APP_CONFIG')
 app = create_app(app_config)
+cli.register(app)
 
 
 # @app.shell_context_processor
