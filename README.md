@@ -7,11 +7,21 @@ API para consulta dos feeds dos principais sites de notícias do Brasil
 - export DB_USER="postgres"
 - export DB_PASS="changeme"
 - export DB_HOST="172.23.0.2"
-- export DATABASE_URL="postgresql://${DB_USER}:${DB_PASS}@${DB_HOST}/${DB_NAME}"
+- export DATABASE_URL="postgresql://\${DB_USER}:\${DB_PASS}\@\${DB_HOST}/${DB_NAME}"
 - flask db init
 - flask db migrate -m 'Initial commit'
 - flask db upgrade
 - flask run
+
+
+### DB Management
+-----------------
+#### remove database
+```flask manage-db destroy-db```
+#### create database
+```flask manage-db create-db```
+#### create tables and relations
+```flask manage-db create-all```
 
 ## Estado atual
 - É possível realizar consumir as notícias, fontes(sites) e categorias das notícias
