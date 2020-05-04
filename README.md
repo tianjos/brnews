@@ -13,6 +13,17 @@ API para consulta dos feeds dos principais sites de notícias do Brasil
 - flask db upgrade
 - flask run
 
+### ENVVAR - LOAD
+----------
+#### heroku config:
+```export app_config="heroku"```
+
+#### testing config:
+```export app_config="testing"```
+
+#### development config:
+```export app_config='development'```
+
 
 ### DB Management
 -----------------
