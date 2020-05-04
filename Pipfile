@@ -18,6 +18,7 @@ python-dateutil = "*"
 gunicorn = "*"
 sqlalchemy-utils = "*"
 psycopg2-binary = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.7"
